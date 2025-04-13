@@ -1,0 +1,15 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main()
+{
+	fstream file("go.txt", ios::in);
+	char on[100];
+	int count=0;;
+	while(file.getline(on,256))
+	 count++;
+	 
+	 cout<<count;
+	 file.close();
+}
