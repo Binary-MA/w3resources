@@ -1,0 +1,16 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+int main(){
+	
+	fstream file("go.txt", ios::in);
+	char on;
+	while(file>>on)
+	 cout<<on;
+	
+	file.close();
+	
+	
+}
