@@ -1,0 +1,34 @@
+//5. Write a C++ program to copy the contents of one text file to another.
+
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream file("go.txt");
+    
+    /
+    if (!file.is_open()) {
+        cerr << "Error opening input file 'go.txt'\n";
+        return 1; 
+    }
+    
+    ofstream copy("copy.txt");
+    
+    }
+    
+    char cop[100]; 
+    
+ 
+    while (file >> cop) {
+        copy << cop << " "; 
+    }
+
+    file.close();
+    copy.close();
+    
+    cout << "File copied successfully.\n";
+    
+    return 0;
+}
