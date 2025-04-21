@@ -1,0 +1,44 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main()
+{
+    char find[50], replace[50], word[50];
+
+    cout << "Which word do you want to find: ";
+    cin.getline(find, 50);
+
+    cout << "Which word do you want to replace it with: ";
+    cin.getline(replace, 50);
+
+    ifstream fin("data.txt");
+    ofstream fout("temp.txt");
+
+    if (!fin || !fout) {
+        cout << "Error opening file.";
+        return 1;
+}
+    while(!fin.eof()){
+    	
+    	fin>>word;
+    	int match=true;
+    	for(int i=0; find[i]!='\0' || word[i]!='\0'; i++){
+    		if(find[i]!=word[i])
+    		match=false;
+    	       break;
+		}
+		if(match)
+			fout<< replace << " ";
+		else
+		fout<< word<<" ";
+		
+    	
+	}
+     fin.close();
+     fout.close();
+     
+      remove("data.txt");
+    rename("temp.txt", "data.txt");
+    
+	}
