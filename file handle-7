@@ -1,0 +1,22 @@
+//7. Write a C++ program to append new data to an existing text file.
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    char text[100];  
+
+    cout << "Enter text you want to append: ";
+    cin.getline(text, 100);  
+
+    ofstream file("data.txt", ios::app); 
+
+    if (!file) {
+        cout << "Error opening file!";
+        return 1;
+    }
+
+    file << text << endl; 
+    file.close();
+
+}
