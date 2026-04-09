@@ -1,0 +1,129 @@
+#include<iostream>
+using namespace std;
+
+template <class T>
+class Node {
+public:
+    T data;           
+    Node<T>* next;    
+    
+    Node(T v) {      
+        data = v;
+        next = nullptr;
+    }
+};
+
+template <class T>
+class LinkedList {
+    Node<T>* head;    
+    Node<T>* tail;    
+    int length;
+    
+public:
+    LinkedList(T v) {
+        Node<T>* newNode = new Node<T>(v);  
+        head = newNode;
+        tail = newNode;
+        length = 1;
+    }
+    
+    void insertAtHead(T v) {
+        Node<T>* newNode = new Node<T>(v);
+        newNode->next = head;
+        head = newNode;
+        if (length == 0) tail = newNode;
+        length++;
+    }
+    
+    Node<T>* get(int index) {
+        if (index < 0 || index >= length) return nullptr;
+        
+        Node<T>* temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp->next;
+        }
+        return temp;
+    }
+    
+    void insertAtTail(T v) {
+        Node<T>* newNode = new Node<T>(v);
+        
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+        length++;
+    }
+    
+    void insertAtPosition(int index, T v) {
+        if (index < 0 || index > length) {
+            return;
+        }
+        else if (index == 0) {
+            insertAtHead(v);
+        }
+        else if (index == length) {
+            insertAtTail(v);
+        }
+        else {
+            Node<T>* newNode = new Node<T>(v);
+            Node<T>* temp = get(index - 1);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            length++;
+        }
+    }
+    
+    void display() {
+        Node<T>* temp = head;
+        
+        if (temp == nullptr) {
+            cout << "EMPTY";
+            return;
+        }
+        
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+
+int main() {
+    LinkedList<int> list(10);
+    int value;
+   int choice,index;
+  do{ cout<<"Welcome to LL\n1.Insert a Node\n2.insert at end\n3.insert at given position\n4.display\n5.exit \nEnter the number: ";
+   cin>>choice;
+
+   switch (choice)
+   {
+   case 1:
+    cout<<"Enter the value";
+    cin>>value;
+    list.insertAtHead(value);
+    break;
+    case 2:
+    cout<<"Enter the value";
+    cin>>value;
+    list.insertAtTail(value);
+    break;
+    case 3:
+    cout<<"Enter the value";
+    cin>>value;
+    cout<<"Enter the index";
+    cin>>index;
+    list.insertAtPosition(value,index);
+    break;
+    case 4:
+    list.display();
+    default:
+    break;
+   }}while( choice!=5);
+    
+    return 0;
+}
